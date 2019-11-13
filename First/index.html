@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+
+#wrap{
+  width: 600px;
+  height: 400px;
+  background: #D0D0D0;
+  position: relative;
+  left: 30%;
+  top: 140px;
+
+
+}  
+#div1, #div2 {
+  float: left;
+  width: 200px;
+  height: 50px;
+  margin: 10px;
+  padding: 8px 16px;
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+
+#drag1{
+    width: 160px;
+    height: 30px;
+    padding: 6px 18px;
+    display: inline-block;
+    background: yellow;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background: white;
+
+}
+</style>
+
+</head>
+<body>
+
+<div id="wrap">
+  <div id="div1" class="drop-target" ondrop="drop(event)" ondragleave="dragLeave(event)" ondragover="allowDrop(event)" ondragenter="dragEnter(event)">
+
+    <span draggable="true" ondragstart="drag(event)" id="drag1">please drag me!!!!!</span>
+    
+  </div>
+
+   <div id="div2" class="drop-target" ondrop="drop(event)" ondragleave="dragLeave(event)" ondragover="allowDrop(event)" ondragenter="dragEnter(event)"></div>
+</div>
+
+<script>
+
+ var initialDragDiv = document.querySelector('#drag1');
+
+ initialDragDiv.parentNode.style.background =  'red'
+
+ 
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function dragEnter(e){
+
+  if(e.target.className=='drop-target'){
+
+  console.log('drag enter');}
+
+}
+
+
+function dragLeave(e){
+
+  if(e.target.className=='drop-target'){
+
+  console.log('drag leave');}
+
+}
+
+
+
+function drag(ev) {
+  var dragedDiv = document.querySelector('#'+ev.target.id).parentNode;
+
+  dragedDiv.style.background = "#D0D0D0";
+
+  ev.dataTransfer.setData("html", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+   
+  var data = ev.dataTransfer.getData("html");
+
+  ev.target.appendChild(document.getElementById(data));
+
+  var droppedDiv = document.querySelector('#'+ev.target.id);
+
+  console.log(ev.target.id);
+  droppedDiv.style.background = "red";
+}
+</script>
+</body>
+</html>
