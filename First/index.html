@@ -13,7 +13,7 @@
 
 
 }  
-#div1, #div2 {
+#div1, #div2, #div3 {
   float: left;
   width: 200px;
   height: 50px;
@@ -47,6 +47,8 @@
   </div>
 
    <div id="div2" class="drop-target" ondrop="drop(event)" ondragleave="dragLeave(event)" ondragover="allowDrop(event)" ondragenter="dragEnter(event)"></div>
+
+   <div id="div3" class="drop-target" ondrop="drop(event)" ondragleave="dragLeave(event)" ondragover="allowDrop(event)" ondragenter="dragEnter(event)"></div>
 </div>
 
 <script>
@@ -64,6 +66,8 @@ function dragEnter(e){
 
   if(e.target.className=='drop-target'){
 
+    event.target.style.border = "3px dotted black";
+
   console.log('drag enter');}
 
 }
@@ -72,6 +76,8 @@ function dragEnter(e){
 function dragLeave(e){
 
   if(e.target.className=='drop-target'){
+
+    event.target.style.border = "";
 
   console.log('drag leave');}
 
