@@ -38,12 +38,16 @@ function drag(ev) {
   ev.dataTransfer.setData("html", ev.target.id);
 }
 
-function drop(ev) {
+function drop(ev,obj) {
   ev.preventDefault();
    
   var data = ev.dataTransfer.getData("html");
 
+  console.log(document.getElementById(data))
+
   ev.target.appendChild(document.getElementById(data));
+
+  
 
   var droppedDiv = document.querySelector('#'+ev.target.id);
 
