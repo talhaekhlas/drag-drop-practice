@@ -80,7 +80,6 @@ function drop(ev) {
 const treeArray = [{'name':'Beverages',
                    'child':[
                              {'name':'Water','child':null},
-                             {'name':'Coffee','child':null},
                              {'name':'tea','child':[
                                {'name':'Black tea','child':null},
                                {'name':'white tea','child':null},
@@ -89,7 +88,9 @@ const treeArray = [{'name':'Beverages',
                                    {'name':'motamuli valo','child':null},
                                    {'name':'Kharap','child':null}
                                ]}
-                             ]}
+                             ]},
+                             {'name':'Coffee','child':null},
+                             
                           ]
                    }
                    ]
@@ -98,29 +99,32 @@ const treeArray = [{'name':'Beverages',
 
 
 var treeList = '';
+var treeNumber = 0;
 function treeGenerate(arrayForTraverse){
 
       
 
-      arrayForTraverse.map(item=>{
+      arrayForTraverse.map((item,index)=>{
         
 
         if(item.child!=null){
+
+            treeNumber++;
             var childLength = item.child.length
-            console.log('length check',arrayForTraverse)
-            treeList +='<li>'+item.name+'</li>'+'<ul>';
+            console.log('length check1',arrayForTraverse,index)
+            treeList +='<li>'+item.name+'<ul>';
             
             treeGenerate(item.child)
         }else{
-          
 
+
+          
+          console.log('length check2',arrayForTraverse,index)
 
           treeList +='<li>'+item.name+'</li>';
         }
 
 
-
-        treeList +='</ul>';
       })
 
       return treeList
