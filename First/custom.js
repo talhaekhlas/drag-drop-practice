@@ -1,6 +1,6 @@
-var initialDragDiv = document.querySelector('#drag1');
+// var initialDragDiv = document.querySelector('#drag1');
 
- initialDragDiv.parentNode.style.background =  'red'
+//  initialDragDiv.parentNode.style.background =  'red'
 
  
 function allowDrop(ev) {
@@ -52,27 +52,7 @@ function drop(ev) {
 }
 
 
-// for tree view
 
-// const demoArray = [
-// {'name':'ekhlas'},
-// {'name':'asad'},
-// {'name':'nur'},
-// {'name':'kafi'},
-// {'name':'mishkat'},
-// {'name':'mikdad'},
-// ]
-
-// var list = ''
-// demoArray.map(item=>{
-
-//   list +='<li>'+item.name+'</li>'
-
-//   console.log(item.name)
-// })
-
-// const listItem = document.querySelector('#list-test');
-// listItem.innerHTML = list
 
 
 
@@ -81,14 +61,21 @@ const treeArray = [{'name':'Beverages',
                    'child':[
                              {'name':'Water','child':null},
                              {'name':'tea','child':[
-                               {'name':'Black tea','child':null},
-                               {'name':'white tea','child':null},
-                               {'name':'green tea','child':[
-                                   {'name':'khub valo','child':null},
-                                   {'name':'motamuli valo','child':null},
-                                   {'name':'Kharap','child':null}
-                               ]}
-                             ]},
+                                                      {'name':'Black tea','child':null},
+                                                      {'name':'white tea','child':null},
+                                                      {'name':'green tea','child':[
+                                                                                    {'name':'khub valo','child':null},
+                                                                                    {'name':'motamuli valo','child':null},
+                                                                                    {'name':'Kharap','child':[
+                                                                                            {'name':'khub valo1','child':null},
+                                                                                         {'name':'motamuli valo1','child':null},
+                                                                                        {'name':'Kharap1','child':null}
+                                                                                        ]
+                                                                                    }
+                                                                                  ]
+                                                      }
+                                                  ]
+                              },
                              {'name':'Coffee','child':null},
                              
                           ]
@@ -98,48 +85,38 @@ const treeArray = [{'name':'Beverages',
 
 
 
-var treeList = '';
-var treeNumber = 0;
+//var treeList = '';
+//var treeNumber = 0;
 function treeGenerate(arrayForTraverse){
 
-      
-
+   var treeList = '';
       arrayForTraverse.map((item,index)=>{
         
 
         if(item.child!=null){
+             treeList +='<li><span class="caret" draggable="true" ondragstart="drag(event)" id="drag1">'+ item.name +'</span><ul class="nested">'+ treeGenerate(item.child) +'</ul></li>';
 
-            treeNumber++;
-            var childLength = item.child.length
-            console.log('length check1',arrayForTraverse,index)
-            treeList +='<li>'+item.name+'<ul>';
-            
-            treeGenerate(item.child)
+
         }else{
 
-
-          
-          console.log('length check2',arrayForTraverse,index)
-
-          treeList +='<li>'+item.name+'</li>';
+          treeList +='<li><span  draggable="true" ondragstart="drag(event)" id="drag1">'+item.name+'</span></li>';
         }
 
 
       })
 
-      return treeList
+
+      return treeList;
 
 }
 
 
 var customTree = treeGenerate(treeArray)
 
-const listTree = document.querySelector('#list-tree');
-listTree.innerHTML = customTree
+const listTree = document.querySelector('#sadUL');
+listTree.innerHTML = customTree;
 
-console.log('custom tree',customTree)
-
-
+//console.log('custom tree',customTree);
 
 
 
@@ -147,7 +124,9 @@ console.log('custom tree',customTree)
 
 
 
-var toggler = document.getElementsByClassName("caret");
+
+
+var toggler = document.querySelectorAll(".caret");
 var i;
 
 for (i = 0; i < toggler.length; i++) {

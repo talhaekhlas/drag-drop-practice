@@ -35,13 +35,13 @@
 /*for tree view*/
 
 /* Remove default bullets */
-/*ul, #myUL {
+ul, #myUL, #sadUL {
   list-style-type: none;
   
-}*/
+}
 
 /* Remove margins and padding from the parent ul */
-#myUL {
+#myUL,#sadUL {
   margin: 0;
   padding: 0;
 }
