@@ -4,7 +4,7 @@
   background: #D0D0D0;
   position: relative;
   left: 30%;
-  top: 140px;
+  
 
 
 }  
@@ -23,10 +23,10 @@
     height: 30px;
     padding: 6px 18px;
     display: inline-block;
-    background: yellow;
+    
     box-sizing: border-box;
     border-radius: 10px;
-    background: white;
+    
 
 }
 
@@ -47,9 +47,35 @@ ul, #myUL, #sadUL {
 }
 
 /* Style the caret/arrow */
-.caret {
+.caret,li {
   cursor: pointer;
   user-select: none; /* Prevent text selection */
+}
+
+.parent-project{
+  background-color: yellow;
+  display: inline-block;
+  margin-bottom: 2px;
+  width: 200px;
+  height: 40px;
+
+  border-radius: 10px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  
+}
+
+.child-project{
+  background: green;
+  display: inline-block;
+  margin-bottom: 5px;
+  width: 200px;
+  height: 40px;
+
+  border-radius: 10px;
+
+  padding: 10px 20px;
+  box-sizing: border-box;
 }
 
 /* Create the caret/arrow with a unicode, and style it */
