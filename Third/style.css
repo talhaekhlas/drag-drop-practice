@@ -10,7 +10,7 @@
 #from,#to{
   float: left;
   width: 22%;
-  /*height: 35px;*/
+  min-height: 35px;
   margin: 10px;
   padding: 10px;
   border: 1px solid black;
