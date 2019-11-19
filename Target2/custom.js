@@ -44,6 +44,12 @@ function onDrop(e) {
 
   var mainUl = document.querySelector('#from');
 
+  console.log('main ul children:',mainUl.children[0])
+
+  mainUl.children[0].innerHTML = 'test';
+
+  return 0;
+
   var child = dragData;
   var parent = mainUl;
 
