@@ -1,4 +1,3 @@
-var LiParentNode = document.querySelector('li');
 
 
 function onDragStart(e) {
@@ -6,7 +5,11 @@ function onDragStart(e) {
 
   // e.target.style.display = 'none'
 
-  e.target.childNodes[1].style.background = 'yellow'
+  e.target.children[0].style.background = 'yellow'
+  e.target.children[0].style.border = '1px solid black'
+  e.target.children[0].style.height = '25px'
+  e.target.children[0].style.width = '150px'
+
 }
 
 function onDragOver(e) {
@@ -33,62 +36,28 @@ function onDragEnd(e){
 
 function onDrop(e) {
   e.preventDefault();
+
+
+  // drag data info
   var dragId = e.dataTransfer.getData("html")
   var dragData = document.getElementById(dragId)
-
   var dragParentId = dragData.parentNode.id;
+
+
   var targetId = e.target.id;
-
-
 
 
   var mainUl = document.querySelector('#from');
 
-  console.log('main ul children:',mainUl.children[0])
-
-  mainUl.children[0].innerHTML = 'test';
-
-  return 0;
-
-  var child = dragData;
-  var parent = mainUl;
-
-  var index = Array.from(mainUl.children).indexOf(child)
-
-  Array.from(mainUl.children).map(item=>{
-    console.log(item)
-  })
+  console.log('main ul children',mainUl.children)
 
 
-  console.log('drag node index', index)
-
-  // for(i = 0; i<Array.from(mainUl.children).length; i++){
-
-  //    console.log('index '+i+':',mainUl.childNodes[i])
-  // }
-
-
-
-
-
-
-  // console.log('Main Ul Nodes: ',mainUl.childNodes)
-  // console.log('Node 0: ',mainUl.childNodes[0])
-  // console.log('Node 1: ',mainUl.childNodes[1])
-  // console.log('Node 2: ',mainUl.childNodes[2])
-  // console.log('Node 3: ',mainUl.childNodes[3])
-
-
+  var dragDataIndex = Array.from(mainUl.children).indexOf(dragData)
 
   
- 
-
-  
-  // console.log('target id:',targetId)
-  // console.log('target',e.target)
 
   if((targetId == 'from' || targetId == 'to') ){
-      // console.log('from or to')
+       console.log('from or to')
       if(targetId!=dragParentId){
         e.target.appendChild(dragData)
       }
@@ -101,11 +70,11 @@ function onDrop(e) {
 
 
   if(e.target.nodeName == 'LI'){
-      // console.log('li')
+      console.log('li')
       if(dragParentId!=e.target.parentNode.id){
         e.target.parentNode.appendChild(dragData)
       }else{
-        // console.log('same li parent');
+        console.log('same li parent');
       }
 
       
@@ -114,19 +83,39 @@ function onDrop(e) {
 
   if(e.target.nodeName == 'SPAN'){
 
-      // console.log('span')
+      console.log('span')
 
       if(dragParentId!=e.target.parentNode.parentNode.id){
         e.target.parentNode.parentNode.appendChild(dragData)
       }
-      // else{
-
-      //   var dropLiId = e.target.parentNode.nextSibling.nextSibling.insertAdjacentElement('beforebegin', dragData);
-
-
-      //   console.log('same span parent:',dropLiId);
+      else{
+        console.log('same span parent:');
+        var droppedArea = e.target.parentNode;
+        var droppedAreaHtml = e.target.parentNode.innerHTML;
+        var droppedAreaIndex = Array.from(mainUl.children).indexOf(droppedArea);
        
-      // }
+        
+        var dragHtml = dragData.innerHTML;
+        mainUl.children[droppedAreaIndex].innerHTML = dragHtml;
+
+        mainUl.children[droppedAreaIndex].children[0].style.background = 'red';
+        mainUl.children[droppedAreaIndex].children[0].style.border = '';
+
+
+        mainUl.children[droppedAreaIndex].children[0].style.height = '30px'
+        mainUl.children[droppedAreaIndex].children[0].style.width = '200px'
+
+        mainUl.children[dragDataIndex].innerHTML = droppedAreaHtml;
+
+        mainUl.children[dragDataIndex].children[0].style.background = 'red';
+        mainUl.children[dragDataIndex].children[0].style.border = '';
+        mainUl.children[dragDataIndex].children[0].style.height = '30px'
+        mainUl.children[dragDataIndex].children[0].style.width = '200px'
+
+        
+        console.log('drag drop index',dragDataIndex,droppedAreaIndex)
+       
+      }
 
       
   }
