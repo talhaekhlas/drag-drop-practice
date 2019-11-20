@@ -15,11 +15,35 @@ function onDragStart(e) {
 function onDragOver(e) {
   e.preventDefault();
 
-  // console.log('on drag over')
+  console.log('on drag over',e.target.nodeName)
+  if(e.target.nodeName == 'LI'){
+    e.target.children[0].style.background='green'
+    e.target.children[0].style.transform='scale(1.2)'
+    e.target.children[0].style.transition='.2s'
+    
+  }
+
+  if(e.target.nodeName == 'SPAN'){
+    e.target.style.background='green'
+    e.target.style.transform='scale(1.2)'
+    e.target.style.transition='.2s'
+  }
+  
 }
 
 function onDragLeave(e){
-    // console.log('on drag leave')
+     if(e.target.nodeName == 'LI'){
+    e.target.children[0].style.background='red'
+    e.target.children[0].style.transform='scale(1)'
+    e.target.children[0].style.transition='.2s'
+    
+  }
+
+  if(e.target.nodeName == 'SPAN'){
+    e.target.style.background='red'
+    e.target.style.transform='scale(1)'
+    e.target.style.transition='.2s'
+  }
 }
 
 function onDragEnter(e){
@@ -104,6 +128,7 @@ function onDrop(e) {
 
         mainUl.children[droppedAreaIndex].children[0].style.height = '30px'
         mainUl.children[droppedAreaIndex].children[0].style.width = '200px'
+        mainUl.children[droppedAreaIndex].children[0].style.transform = 'scale(1)'
 
         mainUl.children[dragDataIndex].innerHTML = droppedAreaHtml;
 
@@ -111,6 +136,7 @@ function onDrop(e) {
         mainUl.children[dragDataIndex].children[0].style.border = '';
         mainUl.children[dragDataIndex].children[0].style.height = '30px'
         mainUl.children[dragDataIndex].children[0].style.width = '200px'
+        mainUl.children[dragDataIndex].children[0].style.transform = 'scale(1)'
 
         
         console.log('drag drop index',dragDataIndex,droppedAreaIndex)
