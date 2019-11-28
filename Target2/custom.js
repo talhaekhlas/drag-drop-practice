@@ -7,26 +7,39 @@ function onDragStart(e) {
 
   e.target.children[0].style.background = 'yellow'
   e.target.children[0].style.border = '1px solid black'
-  e.target.children[0].style.height = '25px'
-  e.target.children[0].style.width = '150px'
+  // e.target.children[0].style.height = '25px'
+  // e.target.children[0].style.width = '150px'
 
 }
 
 function onDragOver(e) {
   e.preventDefault();
 
-  console.log('on drag over',e.target.nodeName)
+  console.log('on drag over',e)
+
+  var dragId = e.dataTransfer.getData("html")
+  var dragData = document.getElementById(dragId)
+  // console.log('drag id on drag over', e.dataTransfer)
+
+
+
+  // if(e.clientX>100){
+  //   dragData.style.background = black;
+  // }else{
+  //   dragData.style.background = 'red';
+  // }
+
+
   if(e.target.nodeName == 'LI'){
+
     e.target.children[0].style.background='green'
-    e.target.children[0].style.transform='scale(1.2)'
-    e.target.children[0].style.transition='.2s'
+    
     
   }
 
   if(e.target.nodeName == 'SPAN'){
     e.target.style.background='green'
-    e.target.style.transform='scale(1.2)'
-    e.target.style.transition='.2s'
+    
   }
   
 }
@@ -34,15 +47,13 @@ function onDragOver(e) {
 function onDragLeave(e){
      if(e.target.nodeName == 'LI'){
     e.target.children[0].style.background='red'
-    e.target.children[0].style.transform='scale(1)'
-    e.target.children[0].style.transition='.2s'
+   
     
   }
 
   if(e.target.nodeName == 'SPAN'){
     e.target.style.background='red'
-    e.target.style.transform='scale(1)'
-    e.target.style.transition='.2s'
+   
   }
 }
 
@@ -67,13 +78,13 @@ function onDrop(e) {
   var dragData = document.getElementById(dragId)
   var dragParentId = dragData.parentNode.id;
 
+  console.log('on drop drag id',dragId)
+
 
   var targetId = e.target.id;
 
 
   var mainUl = document.querySelector('#from');
-
-  console.log('main ul children',mainUl.children)
 
 
   var dragDataIndex = Array.from(mainUl.children).indexOf(dragData)
@@ -126,17 +137,15 @@ function onDrop(e) {
         mainUl.children[droppedAreaIndex].children[0].style.border = '';
 
 
-        mainUl.children[droppedAreaIndex].children[0].style.height = '30px'
-        mainUl.children[droppedAreaIndex].children[0].style.width = '200px'
-        mainUl.children[droppedAreaIndex].children[0].style.transform = 'scale(1)'
+        
+       
 
         mainUl.children[dragDataIndex].innerHTML = droppedAreaHtml;
 
         mainUl.children[dragDataIndex].children[0].style.background = 'red';
         mainUl.children[dragDataIndex].children[0].style.border = '';
-        mainUl.children[dragDataIndex].children[0].style.height = '30px'
-        mainUl.children[dragDataIndex].children[0].style.width = '200px'
-        mainUl.children[dragDataIndex].children[0].style.transform = 'scale(1)'
+        
+        
 
         
         console.log('drag drop index',dragDataIndex,droppedAreaIndex)
